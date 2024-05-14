@@ -3,7 +3,8 @@ let objectList = [];
 const submitHandler = (e) => {
   const newForm = new FormData(e);
   let task = newForm.get("task");
-  let hour = newForm.get("hours");
+  let hour = +newForm.get("hours");
+
   const obj = {
     task,
     hour,
@@ -12,16 +13,18 @@ const submitHandler = (e) => {
   };
   objectList.push(obj);
   displayGoodList();
+  total();
 };
 // this function is responsible to dispaly data in entry  table dynamically.
 const displayGoodList = () => {
   const displayentlist = document.querySelector("#entrylist");
 
   let strToDisplay = "";
-  objectList = objectList.filter((item) => {
+  const goodList = objectList.filter((item) => {
     return item.type === "good";
   });
-  objectList.map((item, i) => {
+
+  goodList.map((item, i) => {
     const str = `
     
     <td scope="row">${i + 1}</td>
@@ -32,9 +35,9 @@ const displayGoodList = () => {
       item.id
     }")' >
     <i class="fa-solid fa-trash"></i></button
-    ><button class="btn btn-success "   onclick = 'switchtask("${
-      item.id
-    }","bad")'>
+    >
+    <button class="btn btn-success " onclick = 'switchTask("${item.id}","bad")';
+    ">
     <i class="fa-solid fa-arrow-right"></i>
     </button>
     </td>
@@ -44,35 +47,37 @@ const displayGoodList = () => {
   displayentlist.innerHTML = strToDisplay;
 };
 // this function is responsible to dispaly data in entry  table dynamically.
-const displaybadList = () => {
-  const displaybadlist = document.querySelector("#badlist");
+const displayBadList = () => {
+  const displaybadtlist = document.querySelector("#badlist");
 
   let strToDisplay = "";
-  objectList = objectList.filter((item) => {
-    return item.type === "bad";
+  const badList = objectList.filter((item) => {
+    return item.type == "bad";
   });
-
-  objectList.map((item, i) => {
+  badList.map((item, i) => {
     const str = `
-
-  <td scope="row">${i + 1}</td>
-  <td>${item.hour}</td>
-  <td>${item.task}</td>
-  <td class="text-end">
+    
+    <td scope="row">${i + 1}</td>
+    <td>${item.hour}</td>
+    <td>${item.task}</td>
+    <td class="text-end">
+   
+    <button class="btn btn-warning " onclick = 'switchTask("${
+      item.id
+    }","good")';
+    ">
+    <i class="fa-solid fa-arrow-left"></i>
+    </button>
     <button class="btn btn-danger deletebutton mx-2"  onclick = 'ondelete("${
       item.id
-    }", "bad")' >
-      <i class="fa-solid fa-trash"></i></button
-    ><button class="btn btn-success "   onclick = 'switchtask("${
-      item.id
-    }","good")'>
-      <i class="fa-solid fa-arrow-right"></i>
-    </button>
-  </td>
-  </tr>`;
+    }")' >
+    <i class="fa-solid fa-trash"></i></button
+    >
+    </td>
+    </tr>`;
     strToDisplay += str;
   });
-  displaybadlist.innerHTML = strToDisplay;
+  displaybadtlist.innerHTML = strToDisplay;
 };
 
 // id gentrator
@@ -92,15 +97,22 @@ const ondelete = (id) => {
     return item.id !== id;
   });
   displayGoodList();
+  displayBadList();
 };
-const switchtask = (id, type) => {
+const switchTask = (id, type) => {
   objectList = objectList.map((item) => {
-    if (item.id === id) {
+    if (item.id == id) {
       item.type = type;
     }
     return item;
   });
-
-  displaybadList();
-  displaybadList();
+  displayBadList();
+  displayGoodList();
 };
+const total = () => {
+  const totalHours = objectList.reduce((acc, item) => {
+    return acc + item.hr;
+  }, 0);
+  return totalHours;
+};
+console.log(total());
