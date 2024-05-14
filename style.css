@@ -5,3 +5,8 @@
 .table {
   --bs-table-bg: transparent;
 }
+.totalhrs,
+.badlist_hours {
+  color: red;
+  font-weight: 600;
+}

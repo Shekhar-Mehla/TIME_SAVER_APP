@@ -11,9 +11,10 @@ const submitHandler = (e) => {
     id: idgenrator(),
     type: "good",
   };
+
   objectList.push(obj);
+
   displayGoodList();
-  total();
 };
 // this function is responsible to dispaly data in entry  table dynamically.
 const displayGoodList = () => {
@@ -54,6 +55,7 @@ const displayBadList = () => {
   const badList = objectList.filter((item) => {
     return item.type == "bad";
   });
+  total(badList);
   badList.map((item, i) => {
     const str = `
     
@@ -111,8 +113,8 @@ const switchTask = (id, type) => {
 };
 const total = () => {
   const totalHours = objectList.reduce((acc, item) => {
-    return acc + item.hr;
+    return acc + item.hour;
   }, 0);
   return totalHours;
 };
-console.log(total());
+

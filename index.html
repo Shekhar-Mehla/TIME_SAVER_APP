@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="wrapper pt-5">
+    <div class="wrapper p-5">
       <div class="container">
         <h1 class="text-center">SAVE YOUR TIME</h1>
         <!-- FORM -->
@@ -52,7 +52,7 @@ onsubmit="submitHandler(this)"
                 placeholder="Hours"
                 aria-label="Last name"
                 min="1"
-                max =
+                max ="168"
               />
             </div>
             <div class="col-sm-3 d-grid">
@@ -61,6 +61,7 @@ onsubmit="submitHandler(this)"
           </div>
         </form>
         <div class="row">
+          <!-- entry list  -->
           <div class="col-sm-6 mt-4">
             <h3 class="text-center">Entry List</h3>
             <hr />
@@ -70,6 +71,7 @@ onsubmit="submitHandler(this)"
               </tbody>
             </table>
           </div>
+          <!-- bad list  -->
           <div class="col-sm-6 mt-4">
             <h3 class="text-center">Bad List</h3>
             <hr />
@@ -78,9 +80,12 @@ onsubmit="submitHandler(this)"
                 
               </tbody>
             </table>
+            <div class=" fw-bolder p-2 m-2 h-40 w-75 bg-white rounded"> you could save <span class="badlist_hours ">0</span> hours</div>
+
           </div>
           
       </div>
+      <div class=" bg-white w-70 h-10 px-3 py-2 m-5 fw-bolder rounded">you have used <span class="totalhrs ">0</span> hours</div>
     </div>
 
     <!-- external js -->
