@@ -25,15 +25,15 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="wrapper p-5">
-      <div class="container">
+    <div class="wrapper  ">
+      <div class="container p-3">
         <h1 class="text-center">TimeWise: Your Personal Time Tracker & Saver</h1>
         <!-- FORM -->
         <form
           action="javascript:void(0);"
 onsubmit="submitHandler(this)"
         >
-          <div class="row row1  mt-5  border p-5  shadow">
+          <div class="row row1  mt-5  border-sm p-sm-5  shadow">
             <div class="col-sm-6  ">
               <input id = "task"
                 type="text"
@@ -66,18 +66,20 @@ onsubmit="submitHandler(this)"
             <h3 class="text-center">TASKS List</h3>
             <hr />
             <table class="table table-striped border shadow table-hover">
-              <tbody id="entrylist">
-                
+              <tbody id="entrylist" >
+                <td><small> Task list is blank. Let's fill it up with some goals!</small>
               </tbody>
             </table>
           </div>
           <!-- bad list  -->
-          <div class="col-sm-6 mt-4">
+          <div class="col-sm-6 mt-2">
             <h3 class="text-center">BAD TASKS LIST</h3>
             <hr />
             <table class="table table-striped border shadow table-hover">
-              <tbody id="badlist">
-                
+              <tbody id="badlist"><td>
+
+                <small>Select a task from the Task list that isn't worth investing time in</small>
+              </td>
               </tbody>
             </table>
             <div class=" fw-bolder p-2 m-2 h-40 w-75 bg-white rounded"> you could save <span class="badlist_hours ">0</span> hours</div>

@@ -25,12 +25,12 @@ const submitHandler = (e) => {
       "sorry you have used total weekly allocated hours.You cannot have more than 168 hours weekly"
     );
   } else {
+    console.log("hello");
     objectList.push(obj);
     totalelem.innerText = total(objectList);
     hr.value = "";
     tsk.value = "";
     displayGoodList();
-    i;
   }
 };
 // this function is responsible to dispaly data in entry  table dynamically.
@@ -75,7 +75,7 @@ const displayBadList = () => {
   badList.map((item, i) => {
     const str = `
     
-    <td scope="row">${i + 1}</td>
+    <td scope="row">${i + 1}.</td>
     <td>${item.task}</td>
     <td>${item.hour} hrs</td>
     <td class="text-end">

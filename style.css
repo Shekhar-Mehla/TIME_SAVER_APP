@@ -1,3 +1,7 @@
+* {
+  padding: 0;
+  margin: 0;
+}
 .wrapper {
   background: linear-gradient(#e66464a0, #6166a1a3);
   min-height: 100vh;
@@ -15,4 +19,9 @@
     display: flex;
     gap: 10px;
   }
+}
+small {
+  color: rgb(29, 10, 3);
+  padding-left: 5px;
+  border: none;
 }
