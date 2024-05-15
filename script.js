@@ -1,4 +1,7 @@
+const totalelem = document.querySelector(".totalhrs ");
+const displaybadtlist = document.querySelector("#badlist");
 let objectList = [];
+const displayentlist = document.querySelector("#entrylist");
 
 const submitHandler = (e) => {
   const newForm = new FormData(e);
@@ -12,25 +15,39 @@ const submitHandler = (e) => {
     type: "good",
   };
 
-  objectList.push(obj);
-
-  displayGoodList();
+  const hr = document.querySelector("#hours");
+  const tsk = document.querySelector("#task");
+  // add the validation for the empty filled
+  if (task === "" || hour == 0) {
+    alert("you must provide the Activity Name and Hours ");
+  } else if (total(objectList) >= 168) {
+    alert(
+      "sorry you have used total weekly allocated hours.You cannot have more than 168 hours weekly"
+    );
+  } else {
+    objectList.push(obj);
+    totalelem.innerText = total(objectList);
+    hr.value = "";
+    tsk.value = "";
+    displayGoodList();
+    i;
+  }
 };
 // this function is responsible to dispaly data in entry  table dynamically.
 const displayGoodList = () => {
-  const displayentlist = document.querySelector("#entrylist");
-
   let strToDisplay = "";
   const goodList = objectList.filter((item) => {
     return item.type === "good";
   });
 
+  // handle the total hours when activities deleted
+
   goodList.map((item, i) => {
     const str = `
     
-    <td scope="row">${i + 1}</td>
-    <td>${item.hour}</td>
-    <td>${item.task}</td>
+    <td scope="row">${i + 1}.</td>
+    <td>${item.task} </td>
+    <td>${item.hour} hrs</td>
     <td class="text-end">
     <button class="btn btn-danger deletebutton mx-2"  onclick = 'ondelete("${
       item.id
@@ -47,21 +64,20 @@ const displayGoodList = () => {
   });
   displayentlist.innerHTML = strToDisplay;
 };
-// this function is responsible to dispaly data in entry  table dynamically.
+// this function is responsible to dispaly data in bad  table dynamically.
 const displayBadList = () => {
-  const displaybadtlist = document.querySelector("#badlist");
-
   let strToDisplay = "";
   const badList = objectList.filter((item) => {
     return item.type == "bad";
   });
-  total(badList);
+  const totalbedelem = document.querySelector(".badlist_hours");
+  totalbedelem.innerText = total(badList);
   badList.map((item, i) => {
     const str = `
     
     <td scope="row">${i + 1}</td>
-    <td>${item.hour}</td>
     <td>${item.task}</td>
+    <td>${item.hour} hrs</td>
     <td class="text-end">
    
     <button class="btn btn-warning " onclick = 'switchTask("${
@@ -111,10 +127,9 @@ const switchTask = (id, type) => {
   displayBadList();
   displayGoodList();
 };
-const total = () => {
-  const totalHours = objectList.reduce((acc, item) => {
+const total = (list) => {
+  const totalHours = list.reduce((acc, item) => {
     return acc + item.hour;
   }, 0);
   return totalHours;
 };
-
