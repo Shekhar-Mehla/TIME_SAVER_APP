@@ -10,3 +10,9 @@
   color: red;
   font-weight: 600;
 }
+@media (max-width: 578px) {
+  .row1 {
+    display: flex;
+    gap: 10px;
+  }
+}
